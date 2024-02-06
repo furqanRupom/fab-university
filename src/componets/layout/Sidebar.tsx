@@ -28,7 +28,7 @@ const Sidebar = () => {
       sidebarItems = sidebarGenerator(StudentPaths, UserRole.STUDENT);
   }
   return (
-    <Sider breakpoint="lg" collapsedWidth="0">
+    <Sider breakpoint="lg" collapsedWidth="0" style={{position:'sticky',top:'0',left:'0'}}>
       <div>
         <h1 style={{ color: "white", padding: "1.1rem", fontSize: "1.5rem" }}>
           <span style={{ color: "orange" }}>Fab</span> University
@@ -39,7 +39,8 @@ const Sidebar = () => {
         theme="dark"
         mode="inline"
         defaultSelectedKeys={["4"]}
-        items={sidebarItems}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        items={sidebarItems as any}
       />
     </Sider>
   );

@@ -7,7 +7,7 @@ import Sidebar from "./Sidebar";
 import { useAppDispatch } from "../../hooks/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 // const items = [
 //   UserOutlined,
@@ -57,23 +57,24 @@ const MainLayout:FC = () => {
   }
 
   return (
-    <Layout>
-    <Sidebar />
-      <Layout>
-        <Header style={{ padding: 0,}} />
-        <Button onClick={handleLogout}>Logout</Button>
-        <Content style={{ margin: "24px 16px 0" }}>
+    <Layout >
+      <Sidebar />
+      <Layout  style={{minHeight:'100svh'}}>
+      <Button style={{width:'70px'}} onClick={handleLogout}>
+        Logout
+      </Button>
+
+        <Content  >
           <div
             style={{
               padding: 24,
               minHeight: 360,
-
             }}
           >
-           <Outlet />
+            <Outlet />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
+        <Footer  style={{ textAlign: "center" }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>

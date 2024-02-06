@@ -12,6 +12,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const [login] = useLoginMutation();
+  
   const navigate = useNavigate();
 
   /* login function  */
@@ -40,8 +41,8 @@ const Login = () => {
 
     <FHForm  onSubmit={onSubmit}>
 
-      <FHInput type="text" name="id" />
-      <FHInput  type="password" name="password" />
+      <FHInput type="text" name="id" label="id" />
+      <FHInput  type="password" name="password" label="password"  />
 
       <Button htmlType="submit">
         Login

@@ -1,19 +1,46 @@
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Form } from "antd";
 import { ReactNode } from "react";
+import {
+  FieldValues,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 
-interface IFormSubmitTypes {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSubmit :SubmitHandler<any>,
-  children:ReactNode
-}
+type TFormConfig = {
+  defaultValues?: Record<string, unknown>;
+  resolver?: any;
+};
 
-const FHForm = ({ onSubmit,children }:IFormSubmitTypes) => {
-  const methods = useForm();
+type TFormProps = {
+  onSubmit: SubmitHandler<FieldValues>;
+  children: ReactNode;
+} & TFormConfig;
+
+const FHForm = ({
+  onSubmit,
+  children,
+  defaultValues,
+  resolver,
+}: TFormProps) => {
+  const formConfig: TFormConfig = {};
+
+  if (defaultValues) {
+    formConfig["defaultValues"] = defaultValues;
+  }
+
+  if (resolver) {
+    formConfig["resolver"] = resolver;
+  }
+
+  const methods = useForm(formConfig);
+
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>
         {children}
-      </form>
+      </Form>
     </FormProvider>
   );
 };
