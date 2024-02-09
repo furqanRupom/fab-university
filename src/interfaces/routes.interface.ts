@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from "react";
 
 
@@ -36,3 +37,5 @@ export interface IAdminSidebarRoutes{
   label?: ReactNode;
   children?: ISidebarItem[];
 }
+
+

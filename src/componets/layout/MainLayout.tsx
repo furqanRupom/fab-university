@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useAppDispatch } from "../../hooks/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
+import { Header } from "antd/es/layout/layout";
 
 const { Content, Footer } = Layout;
 
@@ -51,20 +52,21 @@ const items: MenuProps["items"] = [
 
 const MainLayout:FC = () => {
   const dispatch = useAppDispatch();
-
   const handleLogout = () => {
     dispatch(logout());
   }
 
   return (
-    <Layout >
+    <Layout>
       <Sidebar />
-      <Layout  style={{minHeight:'100svh'}}>
-      <Button style={{width:'70px'}} onClick={handleLogout}>
-        Logout
-      </Button>
+      <Layout style={{ minHeight: "100svh" }}>
+        <Header>
+          <button style={{ width: "70px" }} onClick={handleLogout}>
+            Logout
+          </button>
+        </Header>
 
-        <Content  >
+        <Content>
           <div
             style={{
               padding: 24,
@@ -74,7 +76,7 @@ const MainLayout:FC = () => {
             <Outlet />
           </div>
         </Content>
-        <Footer  style={{ textAlign: "center" }}>
+        <Footer style={{ textAlign: "center" }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>

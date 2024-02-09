@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Flex } from "antd";
-import FHForm from "../../../componets/form/FHForm";
-import FHSelect from "../../../componets/form/FHSelect";
-import { monthsOptions } from "../../../constants/global.constant";
+
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagemnetApi";
+
 import { toast } from "sonner";
-import { academicSemesterSchema } from "../../../schemas/academicSemester.schema";
+import { useAddAcademicSemesterMutation } from "../../../../redux/features/admin/academicManagemnetApi";
+import { academicSemesterSchema } from "../../../../schemas/academicSemester.schema";
+import FHForm from "../../../../componets/form/FHForm";
+import FHSelect from "../../../../componets/form/FHSelect";
+import { monthsOptions } from "../../../../constants/global.constant";
+
 
 const options = [
   {
@@ -44,19 +48,22 @@ const CreateAcademicSemester = () => {
 
   const onSubmit = async (data: any) => {
     const name = options[Number(data.name - 1)].label;
+    const toastId = toast.loading('add academic semester on processing..')
     const semesterData = {
       name,
       code: data.name,
       year: data.year,
-      startsMonth: data.startMonth,
+      startsMonth: data.startsMonth,
       endMonth: data.endMonth,
     };
-    console.log('clicked')
+
     try {
       const res = await addAcademicSemester(semesterData);
-      console.log(res);
+      const message = res  && res.data!.message
+      toast.success(message,{id:toastId})
+      console.table(res)
     } catch (error) {
-      toast.error("something went wrong");
+      toast.error("something went wrong",{id:toastId});
     }
   };
   return (
@@ -76,8 +83,8 @@ const CreateAcademicSemester = () => {
             <FHSelect name="name" label="name" options={options} />
             <FHSelect name="year" label="year" options={yearOptions} />
             <FHSelect
-              name="startMonth"
-              label="startMonth"
+              name="startsMonth"
+              label="startsMonth"
               options={monthsOptions}
             />
             <FHSelect

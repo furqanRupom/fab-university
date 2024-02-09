@@ -1,14 +1,15 @@
 // import { ReactNode } from "react";
-import AcademicDepartment from "../pages/admin/AcademicDepartment/AcademicDepartment";
-import CreateAcademicDepartment from "../pages/admin/AcademicDepartment/CreateAcademicDepartment";
-import AcademicFaculty from "../pages/admin/AcademicFaculty/AcademicFaculty";
-import CreateAcademicFaculty from "../pages/admin/AcademicFaculty/CreateAcademicFaculty";
-import AcademicSemester from "../pages/admin/AcademicSemester/AcademicSemester";
-import CreateAcademicSemester from "../pages/admin/AcademicSemester/CreateAcademicSemester";
+
+import AcademicDepartment from "../pages/admin/AcademicManagement/AcademicDepartment/AcademicDepartment";
+import CreateAcademicDepartment from "../pages/admin/AcademicManagement/AcademicDepartment/CreateAcademicDepartment";
+import AcademicFaculty from "../pages/admin/AcademicManagement/AcademicFaculty/AcademicFaculty";
+import CreateAcademicFaculty from "../pages/admin/AcademicManagement/AcademicFaculty/CreateAcademicFaculty";
+import AcademicSemester from "../pages/admin/AcademicManagement/AcademicSemester/AcademicSemester";
+import CreateAcademicSemester from "../pages/admin/AcademicManagement/AcademicSemester/CreateAcademicSemester";
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import CreateAdmin from "../pages/admin/CreateAdmin";
-import CreateFaculty from "../pages/admin/CreateFaculty";
-import CreateStudent from "../pages/admin/CreateStudent";
+import CreateAdmin from "../pages/admin/UserManagement/CreateAdmin";
+import CreateFaculty from "../pages/admin/UserManagement/CreateFaculty";
+import CreateStudent from "../pages/admin/UserManagement/CreateStudent";
 // import { NavLink } from "react-router-dom";
 
 /* admin paths 2 */

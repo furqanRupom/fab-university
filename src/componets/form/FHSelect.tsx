@@ -5,7 +5,7 @@ import { Controller } from "react-hook-form";
 interface FHSelectProps {
   label: string ;
   name: string;
-  options:{label:string,value:string,disabled?:boolean}[]
+  options?:{label:string,value:string,disabled?:boolean}[]
 }
 
 const FHSelect = ({ label, name ,options}: FHSelectProps) => {
