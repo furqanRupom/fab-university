@@ -1,22 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Flex } from "antd";
-import { useAddAcademicFacultyMutation } from "../../../../redux/features/admin/academicManagemnetApi";
+import { useAddAcademicFacultyMutation } from "../../../../redux/features/admin/academicManagementApi";
 import { toast } from "sonner";
 import { academicFacultySchema } from "../../../../schemas/academicFaculty.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FHForm from "../../../../componets/form/FHForm";
 import FHInput from "../../../../componets/form/FHInput";
 
-
 const CreateAcademicFaculty = () => {
   /* create academic faculty  */
   const [addAcademicFaculty] = useAddAcademicFacultyMutation();
-  const handleAddFaculty = async (data:any) => {
+  const handleAddFaculty = async (data: any) => {
     const toastId = toast.loading("add faculty is on processing ...");
     try {
       const res = await addAcademicFaculty({ name: data.facultyName });
       console.log(res);
-      toast.success(res?.data?.message , {
+      toast.success(res?.data?.message, {
         id: toastId,
       });
     } catch (error) {

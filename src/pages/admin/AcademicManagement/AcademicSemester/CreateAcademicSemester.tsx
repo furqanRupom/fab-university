@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Flex } from "antd";
 
-
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { toast } from "sonner";
-import { useAddAcademicSemesterMutation } from "../../../../redux/features/admin/academicManagemnetApi";
+import { useAddAcademicSemesterMutation } from "../../../../redux/features/admin/academicManagementApi";
 import { academicSemesterSchema } from "../../../../schemas/academicSemester.schema";
 import FHForm from "../../../../componets/form/FHForm";
 import FHSelect from "../../../../componets/form/FHSelect";
 import { monthsOptions } from "../../../../constants/global.constant";
-
 
 const options = [
   {
@@ -36,19 +34,14 @@ const yearOptions = [0, 1, 2, 3, 4].map((num) => ({
   value: `${currentYear + num}`,
 }));
 
-
-
-
 const CreateAcademicSemester = () => {
-
-
   /* add or create academic semester */
 
   const [addAcademicSemester] = useAddAcademicSemesterMutation();
 
   const onSubmit = async (data: any) => {
     const name = options[Number(data.name - 1)].label;
-    const toastId = toast.loading('add academic semester on processing..')
+    const toastId = toast.loading("add academic semester on processing..");
     const semesterData = {
       name,
       code: data.name,
@@ -59,11 +52,11 @@ const CreateAcademicSemester = () => {
 
     try {
       const res = await addAcademicSemester(semesterData);
-      const message = res  && res.data!.message
-      toast.success(message,{id:toastId})
-      console.table(res)
+      const message = res && res.data!.message;
+      toast.success(message, { id: toastId });
+      console.table(res);
     } catch (error) {
-      toast.error("something went wrong",{id:toastId});
+      toast.error("something went wrong", { id: toastId });
     }
   };
   return (

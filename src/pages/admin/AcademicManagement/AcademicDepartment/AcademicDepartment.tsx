@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button, Table, type TableColumnsType } from "antd";
-import { useGetAllAcademicDepartmentQuery } from "../../../../redux/features/admin/academicManagemnetApi";
+import { useGetAllAcademicDepartmentQuery } from "../../../../redux/features/admin/academicManagementApi";
 
-
-interface IIAcademicTableData {
+export interface IIAcademicTableData {
   title: string;
 }
 

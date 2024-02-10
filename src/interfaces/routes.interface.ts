@@ -27,15 +27,18 @@ export interface IAdminRoutes {
 }
 
 
-interface ISidebarItem {
+type ISidebarItem =
+ {
   key?: string;
   label?: ReactNode;
-}
+ } | undefined
+
+
 
 export interface IAdminSidebarRoutes{
   key?: string;
   label?: ReactNode;
-  children?: ISidebarItem[];
+  children?: ISidebarItem[] ;
 }
 
 

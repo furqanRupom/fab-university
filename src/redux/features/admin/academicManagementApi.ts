@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IAcademicManagementData, IQueryParams } from "../../../interfaces/academicManagement.interfaces";
+import {  IAcademicManagementData, IQueryParams } from "../../../interfaces/academicManagement.interfaces";
 import { IResponse } from "../../../interfaces/interface";
 import { baseApi } from "../../api/baseAPI";
 

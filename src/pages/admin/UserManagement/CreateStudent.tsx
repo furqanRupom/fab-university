@@ -3,55 +3,57 @@ import FHForm from "../../../componets/form/FHForm";
 import FHInput from "../../../componets/form/FHInput";
 import { Button, Col, Divider, Form, Input, Row } from "antd";
 import FHDatePicker from "../../../componets/form/FHDatePicker";
-import { useGetAllAcademicDepartmentQuery, useGetAllAcademicSemestersQuery } from "../../../redux/features/admin/academicManagemnetApi";
+import {
+  useGetAllAcademicDepartmentQuery,
+  useGetAllAcademicSemestersQuery,
+} from "../../../redux/features/admin/academicManagementApi";
 import FHSelect from "../../../componets/form/FHSelect";
 import { bloodGroups, genders } from "../../../constants/global.constant";
 import { useCreateStudentMutation } from "../../../redux/features/admin/userManagementApi";
 import { toast } from "sonner";
 
 const CreateStudent = () => {
+  const defaultStudentValues = {
+    name: {
+      firstName: "raha",
+      middleName: "Taha",
+      lastName: "Smith",
+    },
+    gender: "male",
+    school: "Example High School",
+    email: "Amra@example1.com",
+    dateOFBirth: "30 August 2002",
+    contactNo: "1234567890",
+    emergencyContactNo: "9876543210",
+    bloodGroup: "O+",
+    presentAddress: "123 Main St, City",
+    permanentAddress: "456 Oak St, Town",
+    guardian: {
+      fatherName: "Mr. Doe",
+      fatherOccupation: "Engineer",
+      fatherContactNo: "1112223333",
+      motherName: "Mrs. Doe",
+      motherOccupation: "Doctor",
+      motherContactNo: "4445556666",
+    },
+    localGuardian: {
+      name: "Local Guardian",
+      occupation: "Teacher",
+      contactNo: "7778889999",
+    },
+    admissionSemester: "65bc02e4e1fe5d8ccca7796a",
+    academicDepartment: "65bc0070d3bac51a59198c5a",
+  };
 
-
- const defaultStudentValues =  {
-         name: {
-            "firstName": "raha",
-            "middleName": "Taha",
-            "lastName": "Smith"
-        },
-        gender: "male",
-        school: "Example High School",
-        email: "Amra@example1.com",
-        dateOFBirth: "30 August 2002",
-        contactNo: "1234567890",
-        emergencyContactNo: "9876543210",
-        bloodGroup: "O+",
-        presentAddress: "123 Main St, City",
-        permanentAddress: "456 Oak St, Town",
-        guardian: {
-            fatherName: "Mr. Doe",
-            fatherOccupation: "Engineer",
-            fatherContactNo: "1112223333",
-            motherName: "Mrs. Doe",
-            motherOccupation: "Doctor",
-            motherContactNo: "4445556666"
-        },
-        "localGuardian": {
-            name: "Local Guardian",
-            occupation: "Teacher",
-            contactNo: "7778889999"
-        },
-        admissionSemester: "65bc02e4e1fe5d8ccca7796a",
-        academicDepartment: "65bc0070d3bac51a59198c5a"
-    }
-  
-  
   /* create student  */
 
-  const { data: allAdmissionSemesters,isLoading:semesterLoading } =
+  const { data: allAdmissionSemesters, isLoading: semesterLoading } =
     useGetAllAcademicSemestersQuery(undefined);
-  const { data: allAcademicDepartment } =
-    useGetAllAcademicDepartmentQuery(undefined,{skip:semesterLoading});
-     const [addStudent] = useCreateStudentMutation(); 
+  const { data: allAcademicDepartment } = useGetAllAcademicDepartmentQuery(
+    undefined,
+    { skip: semesterLoading }
+  );
+  const [addStudent] = useCreateStudentMutation();
 
   /* academic semester options */
 
@@ -67,8 +69,6 @@ const CreateStudent = () => {
     value: item._id,
   }));
 
- 
-
   /* blood group options  */
   const bloodGroupOptions = bloodGroups.map((item) => ({
     label: item,
@@ -82,22 +82,22 @@ const CreateStudent = () => {
     value: item,
   }));
 
-  const handleCreateStudent: SubmitHandler<FieldValues> = async(data) => {
+  const handleCreateStudent: SubmitHandler<FieldValues> = async (data) => {
     const formData = new FormData();
     console.log(data);
     const studentData = {
-      password:"student123",
-      student:data
-    }
+      password: "student123",
+      student: data,
+    };
     formData.append("file", data.Picture);
     formData.append("data", JSON.stringify(studentData));
-   
-     try {
-      const res = await addStudent(formData)
-      console.log(res)
-     } catch (error) {
-       toast.error('Something went wrong !')
-     }
+
+    try {
+      const res = await addStudent(formData);
+      console.log(res);
+    } catch (error) {
+      toast.error("Something went wrong !");
+    }
   };
 
   return (

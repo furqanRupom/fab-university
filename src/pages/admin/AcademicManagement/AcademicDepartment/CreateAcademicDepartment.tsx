@@ -4,7 +4,10 @@ import { Button, Col, Flex } from "antd";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { toast } from "sonner";
-import { useAddAcademicDepartmentMutation, useGetAcademicFacultiesQuery } from "../../../../redux/features/admin/academicManagemnetApi";
+import {
+  useAddAcademicDepartmentMutation,
+  useGetAcademicFacultiesQuery,
+} from "../../../../redux/features/admin/academicManagementApi";
 import FHForm from "../../../../componets/form/FHForm";
 import FHInput from "../../../../componets/form/FHInput";
 import FHSelect from "../../../../componets/form/FHSelect";
@@ -32,7 +35,7 @@ const CreateAcademicDepartment = () => {
     const toastId = toast.loading(
       "academic department added on processing ..."
     );
-    
+
     try {
       const res = await addAcademicDepartment(data);
       console.log(res);

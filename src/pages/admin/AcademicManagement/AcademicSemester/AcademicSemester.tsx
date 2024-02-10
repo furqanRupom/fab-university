@@ -2,8 +2,11 @@
 import { useState } from "react";
 
 import { Button, Table, type TableColumnsType, type TableProps } from "antd";
-import { useGetAllAcademicSemestersQuery } from "../../../../redux/features/admin/academicManagemnetApi";
-import { IAcademicManagementData, IQueryParams } from "../../../../interfaces/academicManagement.interfaces";
+import { useGetAllAcademicSemestersQuery } from "../../../../redux/features/admin/academicManagementApi";
+import {
+  IAcademicManagementData,
+  IQueryParams,
+} from "../../../../interfaces/academicManagement.interfaces";
 
 type IITableData = Pick<
   IAcademicManagementData,
@@ -160,7 +163,6 @@ const AcademicSemester = () => {
     sorter,
     extra
   ) => {
-
     if (extra.action === "filter") {
       const queryParams: IQueryParams[] = [];
 
@@ -178,12 +180,15 @@ const AcademicSemester = () => {
 
   return (
     <div>
-      <h1 style={{textAlign:'center',padding:'1.2rem'}}>Academic Semester</h1>
+      <h1 style={{ textAlign: "center", padding: "1.2rem" }}>
+        Academic Semester
+      </h1>
       <Table
         loading={isFetching}
         columns={columns}
         dataSource={tableData}
         onChange={onChange}
+        pagination={false}
       />
     </div>
   );

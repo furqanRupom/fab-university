@@ -29,8 +29,10 @@ export type IResponseRedux<I> = IResponse<I> & BaseQueryApi
 
 
 
-export interface IAcademicFacultyData<I> {
+ interface IAcademicFacultyData<I> {
    data:I,
    message:string;
    success:boolean;
 }
+
+export default IAcademicFacultyData;

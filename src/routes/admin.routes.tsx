@@ -10,6 +10,8 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/UserManagement/CreateAdmin";
 import CreateFaculty from "../pages/admin/UserManagement/CreateFaculty";
 import CreateStudent from "../pages/admin/UserManagement/CreateStudent";
+import StudentData from "../pages/admin/UserManagement/StudentData";
+import StudentDetails from "../pages/admin/UserManagement/StudentDetails";
 // import { NavLink } from "react-router-dom";
 
 /* admin paths 2 */
@@ -29,8 +31,6 @@ import CreateStudent from "../pages/admin/UserManagement/CreateStudent";
 //   children?:ISidebarItem[]
 
 // }
-
-
 
 export const AdminSidebarPaths = [
   {
@@ -82,6 +82,15 @@ export const AdminSidebarPaths = [
         element: <CreateStudent />,
       },
       {
+        name: "All Students",
+        path: "all-students",
+        element: <StudentData />,
+      },
+      {
+        path: "student-data/:id",
+        element: <StudentDetails />,
+      },
+      {
         name: "Create Faculty",
         path: "create-faculty",
         element: <CreateFaculty />,
@@ -125,7 +134,6 @@ export const AdminSidebarPaths = [
 //   },
 // ];
 
-
 // export const navLinkPaths = adminSidebarPaths.reduce((acc:IAdminSidebarRoutes[], item) => {
 
 //    if(item.path && item.element){
@@ -149,7 +157,6 @@ export const AdminSidebarPaths = [
 //    return acc
 // },[])
 
-
 // export const adminPaths = adminSidebarPaths.reduce((acc:IAdminRoutes[], item) => {
 //   if (item.path && item.element) {
 //     acc.push({
@@ -168,4 +175,3 @@ export const AdminSidebarPaths = [
 
 //   return acc;
 // }, []);
-

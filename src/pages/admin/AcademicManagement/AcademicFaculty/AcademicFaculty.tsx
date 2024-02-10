@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button, Table, type TableColumnsType } from "antd";
-import { useGetAcademicFacultiesQuery } from "../../../../redux/features/admin/academicManagemnetApi";
-
+import { useGetAcademicFacultiesQuery } from "../../../../redux/features/admin/academicManagementApi";
 
 interface IIAcademicTableData {
   title: string;
@@ -12,10 +11,12 @@ const AcademicFaculty = () => {
   const { data: allAcademicFaculties, isFetching } =
     useGetAcademicFacultiesQuery(undefined);
   console.log(allAcademicFaculties);
-  const tableData = allAcademicFaculties?.data?.map(({ _id, name }:{_id:string,name:string}) => ({
-    key: _id,
-    name,
-  }));
+  const tableData = allAcademicFaculties?.data?.map(
+    ({ _id, name }: { _id: string; name: string }) => ({
+      key: _id,
+      name,
+    })
+  );
 
   const columns: TableColumnsType<IIAcademicTableData> = [
     {
