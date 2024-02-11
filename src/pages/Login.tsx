@@ -30,7 +30,7 @@ const Login = () => {
         id: toastId,
         duration: 2000,
       });
-      navigate(`/${user.role}/dashboard`);
+      navigate(`/${user.role  == "superAdmin" ? "admin" : user.role}/dashboard`);
     } catch (error: unknown) {
       toast.error("something went wrong ", { id: toastId, duration: 2000 });
     }

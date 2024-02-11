@@ -2,12 +2,13 @@
 
 import { Button, Table, type TableColumnsType } from "antd";
 import { useGetAcademicFacultiesQuery } from "../../../../redux/features/admin/academicManagementApi";
+import React from "react";
 
 interface IIAcademicTableData {
   title: string;
 }
 
-const AcademicFaculty = () => {
+const AcademicFaculty:React.FunctionComponent = () => {
   const { data: allAcademicFaculties, isFetching } =
     useGetAcademicFacultiesQuery(undefined);
   console.log(allAcademicFaculties);

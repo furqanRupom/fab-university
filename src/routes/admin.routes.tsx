@@ -7,11 +7,17 @@ import CreateAcademicFaculty from "../pages/admin/AcademicManagement/AcademicFac
 import AcademicSemester from "../pages/admin/AcademicManagement/AcademicSemester/AcademicSemester";
 import CreateAcademicSemester from "../pages/admin/AcademicManagement/AcademicSemester/CreateAcademicSemester";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import Courses from "../pages/admin/CourseManagement/Courses/Courses";
+import CreateCourse from "../pages/admin/CourseManagement/Courses/CreateCourse";
+import CreateOfferedCourse from "../pages/admin/CourseManagement/Courses/CreateOfferedCourses";
+import CreateSemesterRegistration from "../pages/admin/CourseManagement/SemesterRegistrations/CreateSemesterRegistration";
+import RegisteredSemesters from "../pages/admin/CourseManagement/SemesterRegistrations/RegisteredSemesters";
 import CreateAdmin from "../pages/admin/UserManagement/CreateAdmin";
 import CreateFaculty from "../pages/admin/UserManagement/CreateFaculty";
 import CreateStudent from "../pages/admin/UserManagement/CreateStudent";
 import StudentData from "../pages/admin/UserManagement/StudentData";
 import StudentDetails from "../pages/admin/UserManagement/StudentDetails";
+import OfferedCourse from "../pages/faculty/OfferedCourse";
 // import { NavLink } from "react-router-dom";
 
 /* admin paths 2 */
@@ -106,72 +112,35 @@ export const AdminSidebarPaths = [
     name: "Course Management",
     children: [
       {
+        name: "Registered Semesters",
+        path: "registered-semesters",
+        element: <RegisteredSemesters />,
+      },
+      {
+        name: "Create  Semester Registration",
+        path: "create-semester-registration",
+        element: <CreateSemesterRegistration />,
+      },
+      {
+        name: "Courses",
+        path: "courses",
+        element: <Courses />,
+      },
+      {
+        name: "Create Course",
+        path: "create-course",
+        element: <CreateCourse />,
+      },
+      {
+        name: "Create Offered Course",
+        path: "create-offered-course",
+        element: <CreateOfferedCourse />,
+      },
+      {
         name: "Offered Course",
         path: "offered-course",
-        element: <CreateStudent />,
+        element: <OfferedCourse />,
       },
     ],
   },
 ];
-
-//  const adminPaths = [
-
-//   {
-//     path: "dashboard",
-//     element: <AdminDashboard />,
-//   },
-//   {
-//     path: "create-student",
-//     element: <CreateStudent />,
-//   },
-//   {
-//     path: "create-faculty",
-//     element: <CreateFaculty />,
-//   },
-//   {
-//     path: "create-admin",
-//     element: <CreateAdmin />,
-//   },
-// ];
-
-// export const navLinkPaths = adminSidebarPaths.reduce((acc:IAdminSidebarRoutes[], item) => {
-
-//    if(item.path && item.element){
-//          acc.push({
-//            key: item.name,
-//            label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
-
-//          })
-//    }
-//    if(item.children){
-//     acc.push({
-//       key:item.name,
-//       label:item.name,
-//       children:item.children.map((child) => ({
-//          key:child.name,
-//          label:<NavLink to={`/admin/${child.path}`}>{child.name}</NavLink>
-//       }))
-//     })
-//    }
-
-//    return acc
-// },[])
-
-// export const adminPaths = adminSidebarPaths.reduce((acc:IAdminRoutes[], item) => {
-//   if (item.path && item.element) {
-//     acc.push({
-//       path: item.path,
-//       element: item.element,
-//     });
-//   }
-//   if (item.children) {
-//     item.children.forEach((child) => {
-//       acc?.push({
-//         path: child.path,
-//         element: child.element,
-//       });
-//     });
-//   }
-
-//   return acc;
-// }, []);

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Flex } from "antd";
+import * as React from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -34,7 +35,7 @@ const yearOptions = [0, 1, 2, 3, 4].map((num) => ({
   value: `${currentYear + num}`,
 }));
 
-const CreateAcademicSemester = () => {
+const CreateAcademicSemester:React.FunctionComponent = () => {
   /* add or create academic semester */
 
   const [addAcademicSemester] = useAddAcademicSemesterMutation();
@@ -78,7 +79,6 @@ const CreateAcademicSemester = () => {
             <FHSelect
               name="startsMonth"
               label="startsMonth"
-              options={monthsOptions}
             />
             <FHSelect
               name="endMonth"
