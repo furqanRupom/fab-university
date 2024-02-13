@@ -17,6 +17,9 @@ dependencies:
   antd:
     specifier: ^5.13.1
     version: 5.13.1(moment@2.30.1)(react-dom@18.2.0)(react@18.2.0)
+  dayjs:
+    specifier: ^1.11.10
+    version: 1.11.10
   jwt-decode:
     specifier: ^4.0.0
     version: 4.0.0

@@ -80,9 +80,10 @@ const AssignFaculty: FunctionComponent = ({ facultyInfo }: any) => {
     const facultyData = {
       courseId: facultyInfo.key,
       data,
-    }(facultyData);
+    }
     const res = await assignFaculty(facultyData);
-    res;
+
+    console.log(res);
     if (res?.data?.success) {
       ("you re success");
     }

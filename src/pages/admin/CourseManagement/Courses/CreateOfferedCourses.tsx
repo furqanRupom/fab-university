@@ -1,21 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import FHForm from "../../../../componets/form/FHForm";
 import FHSelect from "../../../../componets/form/FHSelect";
+import dayjs from "dayjs"
 import {
+  useAddOfferedCourseMutation,
   useGetAllCoursesQuery,
   useGetAllSemesterRegistrationQuery,
+  useGetCourseFacultiesQuery,
 } from "../../../../redux/features/admin/courseManagement";
 import {
   useGetAcademicFacultiesQuery,
   useGetAllAcademicDepartmentQuery,
   useGetAllAcademicSemestersQuery,
 } from "../../../../redux/features/admin/academicManagementApi";
-import { useGetAllFacultiesQuery } from "../../../../redux/features/admin/userManagementApi";
-import { Button, Col, Flex, Form, Row, TimePicker } from "antd";
+import { Button, Col, Flex } from "antd";
 import FHSelectWithWatch from "../../../../componets/form/FHSelectWithWatch";
 import FHInput from "../../../../componets/form/FHInput";
-import { Controller } from "react-hook-form";
 import FHTimePicker from "../../../../componets/form/FHTimePicker";
+import { toast } from "sonner";
 
 interface IOfferedCoursesProps {}
 
@@ -30,8 +33,9 @@ const CreateOfferedCourse: React.FunctionComponent<
     useGetAllAcademicDepartmentQuery(undefined);
   const { data: academicSemester } = useGetAllAcademicSemestersQuery(undefined);
   const { data: academicFaculty } = useGetAcademicFacultiesQuery(undefined);
-  const { data: faculties } = useGetAllFacultiesQuery(undefined);
   const { data: courses } = useGetAllCoursesQuery(undefined);
+  const { data: courseFaculties } = useGetCourseFacultiesQuery(courseId,{skip:!courseId});
+  const [addOfferedCourse] = useAddOfferedCourseMutation();
 
   /*  semester registration options */
 
@@ -65,11 +69,12 @@ const CreateOfferedCourse: React.FunctionComponent<
 
   /*  faculties */
 
-  const facultiesOptions = faculties?.data?.map((item) => ({
+  const facultiesOptions = courseFaculties?.data?.faculties?.map((item) => ({
     label:
       `${item.name.firstName} ${item.name.middleName} ${item.name.lastName}` as string,
     value: item._id,
   }));
+
 
   /*  courses options */
 
@@ -78,9 +83,46 @@ const CreateOfferedCourse: React.FunctionComponent<
     value: item._id,
   }));
 
-  const handleOfferedCourse = (data) => {
-    ("adding offered course");
-  console.log(data);
+
+  /* select days options */
+
+ const days = [
+   { name: "Saturday", value: "Sat" },
+   { name: "Monday", value: "Mon" },
+   { name: "Sunday", value: "Sun" },
+   { name: "Tuesday", value: "Tue" },
+   { name: "Wednesday", value: "Wed" },
+   { name: "Thursday", value: "Thu" },
+   { name: "Friday", value: "Fri" },
+ ];
+
+  const selectDays = days.map((day) => ({
+    label:day.name,
+    value:day.value
+  }))
+
+  const handleOfferedCourse = async (data:any) => {
+    const toastId = toast.loading("offered course in processing ...");
+    const formatStartTime = dayjs(data.startTime).format('HH:mm');
+    const formatEndTime = dayjs(data.endTime).format('HH:mm');
+   
+    const offeredCourseData = {
+      ...data,
+      startTime:formatStartTime,
+      endTime:formatEndTime,
+      section:Number(data.section),
+      maxCapacity:Number(data.maxCapacity)
+    }
+    console.log(offeredCourseData);
+    try {
+      const res = await addOfferedCourse(offeredCourseData);
+      console.log(res);
+      if (res.data.success) {
+        toast.success("offered course created successfully", { id: toastId });
+      }
+    } catch (error) {
+      toast.error("something went wrong", { id: toastId });
+    }
   };
   return (
     <>
@@ -110,7 +152,7 @@ const CreateOfferedCourse: React.FunctionComponent<
               options={coursesOptions}
             />
             <FHSelect
-             disabled={!courseId}
+              disabled={!courseId}
               label="Faculties"
               name="faculty"
               options={facultiesOptions}
@@ -124,6 +166,11 @@ const CreateOfferedCourse: React.FunctionComponent<
 
             <FHInput type="text" name="section" label="Section" />
             <FHInput type="number" name="maxCapacity" label="Max Capacity" />
+               <FHSelect
+              label="Select Days"
+              name="days"
+              mode="multiple"
+              options={selectDays} />
 
             <FHTimePicker name="startTime" label="Start Time" />
             <FHTimePicker name="endTime" label="End Time" />
