@@ -14,7 +14,7 @@ const CreateAcademicFaculty = () => {
     const toastId = toast.loading("add faculty is on processing ...");
     try {
       const res = await addAcademicFaculty({ name: data.facultyName });
-      console.log(res);
+      res;
       toast.success(res?.data?.message, {
         id: toastId,
       });

@@ -1,4 +1,11 @@
-import { Button, Pagination, Space, Table, TableColumnsType, TableProps } from "antd";
+import {
+  Button,
+  Pagination,
+  Space,
+  Table,
+  TableColumnsType,
+  TableProps,
+} from "antd";
 
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagementApi";
 import { IQueryParams, IStudent } from "../../../interfaces";
@@ -12,7 +19,7 @@ const StudentData = () => {
   const { data: allStudents, isFetching } = useGetAllStudentsQuery([
     { name: "limit", value: 2 },
     { name: "sort", value: "id" },
-    {name:"page",value:page},
+    { name: "page", value: page },
     ...params,
   ]);
 
@@ -20,8 +27,9 @@ const StudentData = () => {
 
   type IStudentData = Pick<
     IStudent,
-    "_id" | "id" | "gender" | "fullName" | "email">;
-  console.log(allStudents);
+    "_id" | "id" | "gender" | "fullName" | "email"
+  >;
+  allStudents;
   const tableData = allStudents?.data?.map(
     ({ _id, id, gender, email, fullName }: IStudentData) => ({
       fullName,
@@ -29,7 +37,6 @@ const StudentData = () => {
       id,
       gender,
       email,
-  
     })
   );
 
@@ -49,7 +56,7 @@ const StudentData = () => {
       key: "gender",
       dataIndex: "gender",
     },
-    
+
     {
       title: "Student Email",
       key: "email",
@@ -63,7 +70,7 @@ const StudentData = () => {
         return (
           <Space>
             <Link to={`/admin/student-data/${item.key}`}>
-            <Button>Details</Button>
+              <Button>Details</Button>
             </Link>
             <Button>Block</Button>
             <Button danger>Delete</Button>
@@ -103,7 +110,12 @@ const StudentData = () => {
         onChange={onChange}
         pagination={false}
       />
-      <Pagination current={page} onChange={(value) =>  setPage(value)} pageSize={metaData?.limit} total={metaData?.total} />
+      <Pagination
+        current={page}
+        onChange={(value) => setPage(value)}
+        pageSize={metaData?.limit}
+        total={metaData?.total}
+      />
     </div>
   );
 };

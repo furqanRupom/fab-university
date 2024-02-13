@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Dropdown, Table, TableColumnsType, Tag } from "antd";
-import * as React from "react";
-import { useGetAllSemesterRegistrationQuery } from "../../../../redux/features/admin/courseManagement";
+import  React, { useState } from "react";
+import { useGetAllSemesterRegistrationQuery, useUpdateRegisteredSemesterMutation } from "../../../../redux/features/admin/courseManagement";
 import moment from "moment";
 
 interface IRegisteredSemestersProps {}
@@ -19,9 +19,25 @@ const RegisteredSemesters: React.FunctionComponent<
 > = () => {
 
 
+  const [semesterId,setSemesterId] = useState<string>("");
+  const [updateRegisteredSemester] = useUpdateRegisteredSemesterMutation()
+
+
   /* dropdown menu */
-  const handleDropDownMenu = ( ) : void => {
-        console.log('clicked')
+
+  
+
+  const handleDropDownMenu = async(data) : Promise<void> => {
+        const updateData = {
+          id:semesterId,
+          data:{
+            status:data.key
+          }
+        }
+
+       await updateRegisteredSemester(updateData)
+
+
   }
 
   const items = [
@@ -38,6 +54,8 @@ const RegisteredSemesters: React.FunctionComponent<
       key: "ENDED",
     },
   ];
+
+  
   const menuProps = {
     items,
     onClick : handleDropDownMenu
@@ -100,12 +118,12 @@ const RegisteredSemesters: React.FunctionComponent<
     {
       title: "Action",
       key: "Action",
-      render: () => {
+      render: (item) => {
         return (
           <>
             <Button danger>Delete</Button>
-            <Dropdown menu={menuProps} >
-              <Button color="green">Update</Button>
+            <Dropdown trigger={['click']} menu={menuProps} >
+              <Button onClick={() => setSemesterId(item.key)} color="green">Update</Button>
             </Dropdown>
           </>
         );

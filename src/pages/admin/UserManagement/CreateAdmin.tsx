@@ -9,19 +9,9 @@ import { useCreateAdminMutation } from "../../../redux/features/admin/userManage
 import FHSelect from "../../../componets/form/FHSelect";
 
 const CreateAdmin = () => {
-  
+  /* add admin */
 
- /* add admin */
-
- const [addAdmin] = useCreateAdminMutation()
-
-
-
-
-
-
-
-
+  const [addAdmin] = useCreateAdminMutation();
 
   /* blood group options  */
   const bloodGroupOptions = bloodGroups.map((item) => ({
@@ -38,7 +28,7 @@ const CreateAdmin = () => {
 
   const handleCreateStudent: SubmitHandler<FieldValues> = async (data) => {
     const formData = new FormData();
-    console.log(data);
+    data;
     const facultyData = {
       password: "admin123",
       admin: data,
@@ -48,7 +38,7 @@ const CreateAdmin = () => {
 
     try {
       const res = await addAdmin(formData);
-      console.log(res);
+      res;
     } catch (error) {
       toast.error("Something went wrong !");
     }
@@ -126,7 +116,6 @@ const CreateAdmin = () => {
                   options={bloodGroupOptions}
                 />
               </Col>
-
             </Row>
 
             <Divider>Address Info</Divider>

@@ -10,7 +10,10 @@ import {
 } from "../../../redux/features/admin/academicManagementApi";
 import FHSelect from "../../../componets/form/FHSelect";
 import { bloodGroups, genders } from "../../../constants/global.constant";
-import { useCreateFacultyMutation, useCreateStudentMutation } from "../../../redux/features/admin/userManagementApi";
+import {
+  useCreateFacultyMutation,
+  useCreateStudentMutation,
+} from "../../../redux/features/admin/userManagementApi";
 import { toast } from "sonner";
 
 const CreateFaculty = () => {
@@ -48,32 +51,23 @@ const CreateFaculty = () => {
 
   /* create student  */
 
-
-  const { data: allAcademicDepartment } = useGetAllAcademicDepartmentQuery(
-    undefined
-   
-  );
+  const { data: allAcademicDepartment } =
+    useGetAllAcademicDepartmentQuery(undefined);
   const [addFaculty] = useCreateFacultyMutation();
-
-
-
-
-
 
   /* academic faculty options */
 
-  const {data:academicFaculties} = useGetAcademicFacultiesQuery(undefined)
-  console.log(academicFaculties);
- 
+  const { data: academicFaculties } =
+    useGetAcademicFacultiesQuery(undefined)(academicFaculties);
 
-  const academicFacultyOptions = academicFaculties?.data.map((item:any) => ({
+  const academicFacultyOptions = academicFaculties?.data.map((item: any) => ({
     label: item.name,
     value: item._id,
   }));
 
   /* academic department options  */
 
-  const departmentOptions = allAcademicDepartment?.data.map((item:any) => ({
+  const departmentOptions = allAcademicDepartment?.data.map((item: any) => ({
     label: item.name,
     value: item._id,
   }));
@@ -93,7 +87,7 @@ const CreateFaculty = () => {
 
   const handleCreateStudent: SubmitHandler<FieldValues> = async (data) => {
     const formData = new FormData();
-    console.log(data);
+    data;
     const facultyData = {
       password: "faculty123",
       faculty: data,
@@ -103,9 +97,9 @@ const CreateFaculty = () => {
 
     try {
       const res = await addFaculty(formData);
-      console.log(res);
-      if(res!.success){
-        toast.success('Users Created Successfully !')
+      res;
+      if (res!.success) {
+        toast.success("Users Created Successfully !");
       }
     } catch (error) {
       toast.error("Something went wrong !");
@@ -184,7 +178,6 @@ const CreateFaculty = () => {
                   options={bloodGroupOptions}
                 />
               </Col>
-
             </Row>
 
             <Divider>Address Info</Divider>

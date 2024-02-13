@@ -8,10 +8,10 @@ interface IIAcademicTableData {
   title: string;
 }
 
-const AcademicFaculty:React.FunctionComponent = () => {
+const AcademicFaculty: React.FunctionComponent = () => {
   const { data: allAcademicFaculties, isFetching } =
     useGetAcademicFacultiesQuery(undefined);
-  console.log(allAcademicFaculties);
+  allAcademicFaculties;
   const tableData = allAcademicFaculties?.data?.map(
     ({ _id, name }: { _id: string; name: string }) => ({
       key: _id,

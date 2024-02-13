@@ -10,7 +10,7 @@ export interface IIAcademicTableData {
 const AcademicDepartment = () => {
   const { data: allAcademicFaculties, isFetching } =
     useGetAllAcademicDepartmentQuery(undefined);
-  console.log(allAcademicFaculties);
+  allAcademicFaculties;
   const tableData = allAcademicFaculties?.data?.map(
     ({ _id, name }: { _id: string; name: string }) => ({
       key: _id,

@@ -38,7 +38,7 @@ const CreateAcademicDepartment = () => {
 
     try {
       const res = await addAcademicDepartment(data);
-      console.log(res);
+      res;
       toast.success(res?.data?.message as string, { id: toastId });
     } catch (error) {
       toast.error(error?.data?.message as string, { id: toastId });

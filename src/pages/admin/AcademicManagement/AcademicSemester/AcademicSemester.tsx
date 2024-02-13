@@ -16,7 +16,7 @@ const AcademicSemester = () => {
   const [params, setParams] = useState<IQueryParams[]>([]);
   const { data: allSemesters, isFetching } =
     useGetAllAcademicSemestersQuery(params);
-  console.log(allSemesters);
+  allSemesters;
   const tableData = allSemesters?.data?.map(
     ({ _id, name, startsMonth, endMonth, year }) => ({
       key: _id,

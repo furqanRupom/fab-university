@@ -21,9 +21,7 @@ const Login = () => {
     const toastId = toast.loading("logging in");
     try {
       /*  we was use unwrap for extract extra data folder */
-      console.log(data);
       const res = await login(data).unwrap();
-      console.log(data)
       const user = verifyToken(res.data.accessToken) as IUser;
       dispatch(setUser({ user, token: res.data.accessToken }));
       toast.success("logged in successfully !", {

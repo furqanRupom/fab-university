@@ -10,6 +10,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import Courses from "../pages/admin/CourseManagement/Courses/Courses";
 import CreateCourse from "../pages/admin/CourseManagement/Courses/CreateCourse";
 import CreateOfferedCourse from "../pages/admin/CourseManagement/Courses/CreateOfferedCourses";
+import OfferedCourses from "../pages/admin/CourseManagement/Courses/OfferedCourses";
 import CreateSemesterRegistration from "../pages/admin/CourseManagement/SemesterRegistrations/CreateSemesterRegistration";
 import RegisteredSemesters from "../pages/admin/CourseManagement/SemesterRegistrations/RegisteredSemesters";
 import CreateAdmin from "../pages/admin/UserManagement/CreateAdmin";
@@ -17,7 +18,6 @@ import CreateFaculty from "../pages/admin/UserManagement/CreateFaculty";
 import CreateStudent from "../pages/admin/UserManagement/CreateStudent";
 import StudentData from "../pages/admin/UserManagement/StudentData";
 import StudentDetails from "../pages/admin/UserManagement/StudentDetails";
-import OfferedCourse from "../pages/faculty/OfferedCourse";
 // import { NavLink } from "react-router-dom";
 
 /* admin paths 2 */
@@ -139,7 +139,7 @@ export const AdminSidebarPaths = [
       {
         name: "Offered Course",
         path: "offered-course",
-        element: <OfferedCourse />,
+        element: <OfferedCourses />,
       },
     ],
   },

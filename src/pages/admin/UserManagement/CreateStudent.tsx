@@ -84,7 +84,7 @@ const CreateStudent = () => {
 
   const handleCreateStudent: SubmitHandler<FieldValues> = async (data) => {
     const formData = new FormData();
-    console.log(data);
+    data;
     const studentData = {
       password: "student123",
       student: data,
@@ -94,7 +94,7 @@ const CreateStudent = () => {
 
     try {
       const res = await addStudent(formData);
-      console.log(res);
+      res;
     } catch (error) {
       toast.error("Something went wrong !");
     }
