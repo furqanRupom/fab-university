@@ -5,19 +5,28 @@ import { AdminSidebarPaths } from "../../routes/admin.routes";
 import { FacultyPaths } from "../../routes/faculty.routes";
 import { StudentPaths } from "../../routes/student.routes";
 import { useAppSelector } from "../../hooks/hooks";
-import { IUser, selectCurrentUser } from "../../redux/features/auth/authSlice";
+import {
+  IUser,
+  useCurrentUserToken,
+} from "../../redux/features/auth/authSlice";
+import { verifyToken } from "../../utils/verifyToken";
 
 const Sidebar = () => {
-  const user = useAppSelector(selectCurrentUser) as IUser;
-  const role = user.role;
-  let sidebarItems;
-  const UserRole = {
-    ADMIN: "admin",
-    FACULTY: "faculty",
-    STUDENT: "student",
-  };
+    const UserRole = {
+      ADMIN: "admin",
+      FACULTY: "faculty",
+      STUDENT: "student",
+    };
 
-  switch (role) {
+  let user;
+  const token = useAppSelector(useCurrentUserToken);
+  if (token) {
+    user = verifyToken(token);
+  }
+
+  let sidebarItems;
+
+  switch ((user as IUser)?.role) {
     case UserRole.ADMIN:
       sidebarItems = sidebarGenerator(AdminSidebarPaths, UserRole.ADMIN);
       break;
@@ -28,7 +37,11 @@ const Sidebar = () => {
       sidebarItems = sidebarGenerator(StudentPaths, UserRole.STUDENT);
   }
   return (
-    <Sider breakpoint="lg" collapsedWidth="0" style={{position:'sticky',top:'0',left:'0'}}>
+    <Sider
+      breakpoint="lg"
+      collapsedWidth="0"
+      style={{ position: "sticky", top: "0", left: "0" }}
+    >
       <div>
         <h1 style={{ color: "white", padding: "1.1rem", fontSize: "1.5rem" }}>
           <span style={{ color: "orange" }}>Fab</span> University

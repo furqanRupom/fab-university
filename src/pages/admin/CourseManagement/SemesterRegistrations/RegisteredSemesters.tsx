@@ -27,15 +27,16 @@ const RegisteredSemesters: React.FunctionComponent<
 
   
 
-  const handleDropDownMenu = async(data) : Promise<void> => {
+  const handleDropDownMenu = async(data) => {
         const updateData = {
           id:semesterId,
           data:{
             status:data.key
           }
         }
-
-       await updateRegisteredSemester(updateData)
+          
+    await  updateRegisteredSemester(updateData)
+ 
 
 
   }
@@ -130,7 +131,7 @@ const RegisteredSemesters: React.FunctionComponent<
       },
     },
   ];
-
+    console.log(semesterId);
   return (
     <div>
       <h1 style={{ textAlign: "center", padding: "1.1rem" }}>

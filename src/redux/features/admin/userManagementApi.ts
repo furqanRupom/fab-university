@@ -1,8 +1,5 @@
 import { IStudent } from "../../../interfaces";
-import {
-
-  IQueryParams,
-} from "../../../interfaces/academicManagement.interfaces";
+import { IQueryParams } from "../../../interfaces/academicManagement.interfaces";
 import { IResponse } from "../../../interfaces/interface";
 import { baseApi } from "../../api/baseAPI";
 
@@ -100,9 +97,22 @@ const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
- 
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "/auth/change-password",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useCreateStudentMutation, useGetAllStudentsQuery,useCreateFacultyMutation,useGetAllFacultiesQuery,useGetAllAdminsQuery,useCreateAdminMutation  } =
-  userManagementApi;
+export const {
+  useCreateStudentMutation,
+  useGetAllStudentsQuery,
+  useCreateFacultyMutation,
+  useGetAllFacultiesQuery,
+  useGetAllAdminsQuery,
+  useCreateAdminMutation,
+  useChangePasswordMutation
+} = userManagementApi;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
 export interface IGuardian {
@@ -47,4 +48,45 @@ export interface IStudent {
   isDeleted: boolean;
   __v:number;
   fullName:string;
+}
+
+
+
+/* course management */
+
+
+
+
+export interface IStudentCourse {
+  _id: string;
+  semesterRegistration: string;
+  academicSemester: string;
+  academicFaculty: string;
+  academicDepartment: string;
+  course: Course;
+  faculty: string;
+  section: number;
+  maxCapacity: number;
+  days: string[];
+  startTime: string;
+  endTime: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  enrolledCourse: any[];
+  completedCourses: any[];
+  completedCourseIds: any[];
+  isPreRequisiteFullFilled: boolean;
+  isAlreadyEnrolled: boolean;
+}
+
+export interface Course {
+  _id: string;
+  title: string;
+  prefix: string;
+  credits: number;
+  code: number;
+  isDeleted: boolean;
+  prerequisiteCourses: any[];
+  __v: number;
 }

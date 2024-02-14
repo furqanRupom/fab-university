@@ -62,6 +62,7 @@ const CreateSemesterRegistration: React.FunctionComponent = () => {
       if (res?.error) {
         toast.error("something went wrong", { id: toastId });
       }
+      console.log(res)
       toast.success("Successfully registered a semester !", { id: toastId });
     } catch (error) {
       toast.error("Something went wrong", { id: toastId });

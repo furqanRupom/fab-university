@@ -1,5 +1,5 @@
 import { useLoginMutation } from "../redux/features/auth/authApi";
-import { IUser, setUser } from "../redux/features/auth/authSlice";
+import { IUser, selectCurrentUser, setUser } from "../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import FHForm from "../componets/form/FHForm";
 import FHInput from "../componets/form/FHInput";
 import { Button, Row } from "antd";
+import { useAppSelector } from "../hooks/hooks";
 
 const Login = () => {
 
@@ -14,7 +15,8 @@ const Login = () => {
   const [login] = useLoginMutation();
   
   const navigate = useNavigate();
-
+ const currentUser = useAppSelector(selectCurrentUser);
+ console.log(currentUser);
   /* login function  */
 
   const onSubmit = async (data: unknown) => {
@@ -28,7 +30,13 @@ const Login = () => {
         id: toastId,
         duration: 2000,
       });
-      navigate(`/${user.role  == "superAdmin" ? "admin" : user.role}/dashboard`);
+
+
+      if (res.data.needsPasswordChanges){
+
+        navigate("/need-password-change");
+      }else
+      navigate(`/${user.role}/dashboard`);
     } catch (error: unknown) {
       toast.error("something went wrong ", { id: toastId, duration: 2000 });
     }

@@ -80,7 +80,8 @@ const courseManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-    }),
+    })
+    
   }),
 });
 
@@ -92,5 +93,5 @@ export const {
   useGetAllCoursesQuery,
   useAddFacultyMutation,
   useAddOfferedCourseMutation,
-  useGetCourseFacultiesQuery
+  useGetCourseFacultiesQuery,
 } = courseManagementApi;
